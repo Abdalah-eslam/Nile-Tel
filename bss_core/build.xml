@@ -1,0 +1,99 @@
+<project name="my-javaee-webapp" default="run" basedir=".">
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  Properties                                     -->
+    <!-- ─────────────────────────────────────────────── -->
+    <property name="src.dir"       value="src"/>
+    <property name="web.dir"       value="web"/>
+    <property name="build.dir"     value="build"/>
+    <property name="classes.dir"   value="${build.dir}/WEB-INF/classes"/>
+    <property name="lib.dir"       value="${web.dir}/WEB-INF/lib"/>
+    <property name="dist.dir"      value="dist"/>
+    <property name="war.file"      value="${dist.dir}/my-javaee-webapp.war"/>
+
+    <!-- Tomcat deployment -->
+    <property name="tomcat.home"   value="${user.home}/tools/apache-tomcat-10.1.39"/>
+    <property name="deploy.dir"    value="${tomcat.home}/webapps"/>
+    <property name="java.home.dir" value="/usr/lib/jvm/java-25-openjdk"/>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  Classpath: servlet-api from Tomcat             -->
+    <!-- ─────────────────────────────────────────────── -->
+    <path id="compile.classpath">
+        <fileset dir="${tomcat.home}/lib" includes="servlet-api.jar"/>
+        <fileset dir="${lib.dir}"         includes="**/*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  clean                                          -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="clean" description="Delete build and dist directories">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  compile                                        -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="compile" depends="clean" description="Compile Java sources">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               encoding="UTF-8"
+               debug="true">
+            <classpath refid="compile.classpath"/>
+        </javac>
+    </target>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  war                                            -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="war" depends="compile" description="Package the WAR file">
+        <mkdir dir="${dist.dir}"/>
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}">
+                <exclude name="WEB-INF/web.xml"/>
+            </fileset>
+            <classes dir="${classes.dir}"/>
+            <lib dir="${lib.dir}" erroronmissingdir="false"/>
+        </war>
+        <echo>WAR built: ${war.file}</echo>
+    </target>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  deploy                                         -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="deploy" depends="war" description="Copy WAR to Tomcat webapps/">
+        <copy file="${war.file}" todir="${deploy.dir}" overwrite="true"/>
+        <echo>Deployed to ${deploy.dir}</echo>
+    </target>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  run  (deploy + start Tomcat)                   -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="run" depends="deploy" description="Deploy and start Tomcat">
+        <exec executable="${tomcat.home}/bin/catalina.sh" spawn="true">
+            <arg value="run"/>
+            <env key="JAVA_HOME" value="${java.home.dir}"/>
+            <env key="CATALINA_HOME" value="${tomcat.home}"/>
+        </exec>
+        <echo>====================================================</echo>
+        <echo> Tomcat started!</echo>
+        <echo> Open: http://localhost:8080/my-javaee-webapp/</echo>
+        <echo> Servlet: http://localhost:8080/my-javaee-webapp/hello</echo>
+        <echo>====================================================</echo>
+    </target>
+
+    <!-- ─────────────────────────────────────────────── -->
+    <!--  stop Tomcat                                    -->
+    <!-- ─────────────────────────────────────────────── -->
+    <target name="stop" description="Shut down Tomcat">
+        <exec executable="${tomcat.home}/bin/shutdown.sh">
+            <env key="JAVA_HOME" value="${java.home.dir}"/>
+            <env key="CATALINA_HOME" value="${tomcat.home}"/>
+        </exec>
+        <echo>Tomcat stopped.</echo>
+    </target>
+
+</project>
