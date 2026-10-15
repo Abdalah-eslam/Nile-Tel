@@ -9,6 +9,11 @@ dist/
 *.ipr
 out/
 
+.env
+target/
+work/
+logs/
+
 # OS
 .DS_Store
 Thumbs.db
