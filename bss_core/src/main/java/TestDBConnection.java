@@ -1,4 +1,5 @@
 
+import utils.CheckPin;
 import utils.DBConnection;
 
 import java.sql.*;
@@ -6,7 +7,6 @@ import java.sql.*;
 public class TestDBConnection {
 
     public static void main(String[] args) {
-
         try (Connection con = DBConnection.getConnection();
              Statement stmt = con.createStatement();
              ResultSet rs = stmt.executeQuery(
