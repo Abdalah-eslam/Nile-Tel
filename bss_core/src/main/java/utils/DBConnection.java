@@ -23,15 +23,15 @@ public class DBConnection {
 
     public static Connection getConnection() throws SQLException {
 
-        if (URL == null || USER == null || PASSWORD == null) {
-            throw new IllegalStateException(
-                    "Database settings are missing. Check your .env file."
-            );
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("PostgreSQL driver not found", e);
         }
 
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-    }
+}
 
 
 
