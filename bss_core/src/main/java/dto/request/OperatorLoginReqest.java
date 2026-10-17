@@ -1,6 +1,6 @@
 package dto.request;
 
-public record operatorLoginReq(
+public record OperatorLoginReqest(
         String username,
         String password
 ) {
