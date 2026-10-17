@@ -2,6 +2,8 @@ package service.Impl;
 
 import dto.request.OperatorLoginReqest;
 import dto.request.SubscriberLoginRequest;
+import exception.InvalidCredentialsException;
+import exception.NotActiveCustomException;
 import model.Subscriber;
 import repository.LoginRepo;
 import service.LoginService;
@@ -20,14 +22,14 @@ public class LoginServiceImpl implements LoginService {
 
         Subscriber subscriber = loginRepo.findSubscriberByNumber(req.msisdn());
         if(subscriber == null) {
-            throw new RuntimeException("Invalid Credentials");
+            throw new InvalidCredentialsException("AUTH001");
         }
         if(!subscriber.getStatus().equals('A')) {
-            throw new RuntimeException("Subscriber is not active");
+            throw new NotActiveCustomException("AUTH002");
         }
 
         if(CheckPin.checkPin(req.pin(), subscriber.getHashedPin())==false){
-               throw new RuntimeException("Invalid Credentials");
+               throw new InvalidCredentialsException("AUTH001");
            }
 
         return subscriber;

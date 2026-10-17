@@ -13,10 +13,10 @@ public class SubscriberDAO {
 
         String sql =
             "SELECT s.msisdn, s.full_name, s.status, " +
-            "s.tariff_code, t.tariff_name, " +
-            "s.balance_piasters, s.activation_dt " +
-            "FROM subscribers s " +
-            "JOIN tariffs t ON s.tariff_code = t.tariff_code " +
+            "s.tariff_id, t.name as tariff_name, " +
+            "s.balance_piasters, s.activated_at " +
+            "FROM subscriber s " +
+            "JOIN tariff_plan t ON s.tariff_id = t.tariff_id " +
             "WHERE s.msisdn = ?";
 
         try (Connection con = DBConnection.getConnection();
@@ -34,19 +34,18 @@ public class SubscriberDAO {
                       .toBigIntegerExact();
 
                 Date activationDate =
-                    rs.getDate("activation_dt");
+                    rs.getDate("activated_at");
 
                 return new SubscriberResponse(
                     rs.getString("msisdn"),
                     rs.getString("full_name"),
                     rs.getString("status"),
-                    rs.getString("tariff_code"),
+                    rs.getString("tariff_id"),
                     rs.getString("tariff_name"),
                     balance,
                     activationDate == null
                         ? null
-                        : new java.text.SimpleDateFormat("dd/MM/yyyy")
-                            .format(activationDate)
+                        : activationDate.toString()
                 );
             }
         }
