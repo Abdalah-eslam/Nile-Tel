@@ -1,27 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import dto.request.subscriberLoginReq;
+import dto.request.SubscriberLoginRequest;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import service.Impl.loginService;
-import service.loginInterface;
+import service.Impl.LoginServiceImpl;
+import service.LoginService;
 
 @WebServlet("/api/auth/login")
 public class LoginServlet extends HttpServlet {
 
-    private loginInterface loginInterface;
+    private LoginService LoginService;
 
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        this.loginInterface = new loginService();
+        this.LoginService = new LoginServiceImpl();
             }
 
 
@@ -39,8 +38,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
       String phoneNumber =  req.getParameter("PhoneNumber");
       String pin =  req.getParameter("pin");
-       subscriberLoginReq reqbody = new subscriberLoginReq(phoneNumber , pin);
-        loginInterface.Subscriberlogin(reqbody);
+       SubscriberLoginRequest reqbody = new SubscriberLoginRequest(phoneNumber , pin);
+        LoginService.subscriberLogin(reqbody);
         resp.getWriter().write("Login successful");
         resp.getWriter().close();
 

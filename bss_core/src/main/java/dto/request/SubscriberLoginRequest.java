@@ -1,6 +1,6 @@
 package dto.request;
 
-public record subscriberLoginReq(
+public record SubscriberLoginRequest(
         String msisdn,
         String pin
 ) {
