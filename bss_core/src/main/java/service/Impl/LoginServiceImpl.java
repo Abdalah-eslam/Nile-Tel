@@ -1,26 +1,24 @@
 package service.Impl;
 
-import dto.request.operatorLoginReq;
-import dto.request.subscriberLoginReq;
+import dto.request.OperatorLoginReqest;
+import dto.request.SubscriberLoginRequest;
 import model.Subscriber;
 import repository.LoginRepo;
-import service.loginInterface;
+import service.LoginService;
 import utils.CheckPin;
 
-import java.security.MessageDigest;
 
-
-public class loginService implements loginInterface {
+public class LoginServiceImpl implements LoginService {
     private LoginRepo loginRepo;
 
-    public loginService() {
+    public LoginServiceImpl() {
         this.loginRepo = new LoginRepo();
     }
 
     @Override
-    public Subscriber Subscriberlogin(subscriberLoginReq req) {
+    public Subscriber subscriberLogin(SubscriberLoginRequest req) {
 
-        Subscriber subscriber = loginRepo.findSubscriberbyNumber(req.msisdn());
+        Subscriber subscriber = loginRepo.findSubscriberByNumber(req.msisdn());
         if(subscriber == null) {
             throw new RuntimeException("Invalid Credentials");
         }
@@ -32,16 +30,11 @@ public class loginService implements loginInterface {
                throw new RuntimeException("Invalid Credentials");
            }
 
-        return subscriber ;
-
-
-
-
-
+        return subscriber;
     }
 
     @Override
-    public void Operatorlogin(operatorLoginReq req) {
+    public void operatorLogin(OperatorLoginReqest req) {
 
     }
 
