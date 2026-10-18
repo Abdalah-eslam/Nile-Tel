@@ -23,22 +23,19 @@ public class SubscriberMeServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
 
-        if (session == null) {
-            ApiUtil.error(response, 401, "AUTH001");
-            return;
-        }
+
 
         String role = (String) session.getAttribute("role");
 
         if (!"SUB".equals(role)) {
-            ApiUtil.error(response, 403, "SEC001");
+            ApiUtil.error(response, 200, "SEC001");
             return;
         }
 
         Object sessionMsisdn = session.getAttribute("msisdn");
 
         if (sessionMsisdn == null) {
-            ApiUtil.error(response, 401, "AUTH001");
+            ApiUtil.error(response, 200, "AUTH001");
             return;
         }
 

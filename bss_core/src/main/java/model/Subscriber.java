@@ -5,14 +5,14 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 
 public class Subscriber {
-  private  int msisdn;
+  private  String msisdn;
   private  String fullName;
   private Character status;
   private int tariff_code ;
   private String hashedPin;
   private BigInteger balance_piasters;
 
-    public Subscriber(int msisdn, String fullName, Character status, int tariff_code, String hashedPin, BigInteger balance_piasters, Timestamp activation_at) {
+    public Subscriber(String msisdn, String fullName, Character status, int tariff_code, String hashedPin, BigInteger balance_piasters, Timestamp activation_at) {
         this.msisdn = msisdn;
         this.fullName = fullName;
         this.status = status;
@@ -38,7 +38,7 @@ public class Subscriber {
 
 
 
-    public int getMsisdn() {
+    public String getMsisdn() {
         return msisdn;
     }
 
@@ -59,7 +59,7 @@ public class Subscriber {
     }
 
 
-    public void setMsisdn(int msisdn) {
+    public void setMsisdn(String msisdn) {
         this.msisdn = msisdn;
     }
 

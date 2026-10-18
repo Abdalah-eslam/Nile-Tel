@@ -2,6 +2,8 @@ package utils;
 
 import dto.response.SubscriberResponse;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Operator;
+
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -25,6 +27,24 @@ public class ApiUtil {
                     .replace("\r", "\\r")
                     .replace("\t", "\\t");
     }
+    public static String subscriberLoginJson(SubscriberResponse s, String sessionId) {
+        return "{"
+                + "\"RESULT\":\"OK\","
+                + "\"DATA\":{"
+                + "\"MSISDN\":\"" + escape(s.getMsisdn()) + "\","
+                + "\"FULL_NAME\":\"" + escape(s.getFullName()) + "\","
+                + "\"STATUS\":\"" + escape(s.getStatus()) + "\","
+                + "\"TARIFF_CODE\":\"" + escape(s.getTariffCode()) + "\","
+                + "\"BALANCE_PIASTERS\":" + s.getBalancePiasters() + ","
+                + "\"ACTIVATION_DT\":\""
+                + (s.getActivationDt() == null
+                ? ""
+                : escape(s.getActivationDt())) + "\""
+                + ","
+                + "\"SESSION_ID\":\"" + escape(sessionId) + "\""
+                + "}}";
+    }
+
 
     public static String subscriberJson(SubscriberResponse s) {
         return "{"
@@ -57,5 +77,16 @@ public class ApiUtil {
 
     public static boolean validMsisdn(String msisdn) {
         return msisdn != null && msisdn.matches("\\d{11}");
+    }
+
+    public static String operatorLoginJson(Operator operator, String id) {
+        return "{"
+                + "\"RESULT\":\"OK\","
+                + "\"DATA\":{"
+                + "\"USERNAME\":\"" + escape(operator.getUsername()) + "\","
+                + "\"FULL_NAME\":\"" + escape(operator.getFull_name()) + "\","
+                + "\"ROLE\":\"" + escape(operator.getRole()) + "\","
+                + "\"SESSION_ID\":\"" + escape(id) + "\""
+                + "}}";
     }
 }
