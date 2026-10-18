@@ -9,6 +9,8 @@ import java.sql.SQLException;
 public class DBConnection {
 
     private static final Dotenv dotenv = Dotenv.configure()
+
+            .directory("E:\\Nile-Tel\\bss_core")
             .ignoreIfMissing()
             .load();
 

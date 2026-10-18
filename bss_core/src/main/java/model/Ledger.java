@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Ledger {
     private Long txnId;
-    private String msisdn;
+    private Long subscriberId;
     private Timestamp txnTs;
     private char txnType;
     private long amountPiasters;
@@ -15,16 +15,7 @@ public class Ledger {
     public Ledger() {
     }
 
-    public Ledger(Long txnId, String msisdn, Timestamp txnTs, char txnType,
                   long amountPiasters, long balanceAfter, String refNo, String reason) {
-        setTxnId(txnId);
-        setMsisdn(msisdn);
-        setTxnTs(txnTs);
-        setTxnType(txnType);
-        setAmountPiasters(amountPiasters);
-        setBalanceAfter(balanceAfter);
-        setRefNo(refNo);
-        setReason(reason);
     }
 
     public Long getTxnId() {
@@ -35,12 +26,12 @@ public class Ledger {
         this.txnId = txnId;
     }
 
-    public String getMsisdn() {
-        return msisdn;
+    public Long getSubscriberId() {
+        return subscriberId;
     }
 
-    public void setMsisdn(String msisdn) {
-        this.msisdn = msisdn;
+    public void setSubscriberId(Long subscriberId) {
+        this.subscriberId = subscriberId;
     }
 
     public Timestamp getTxnTs() {

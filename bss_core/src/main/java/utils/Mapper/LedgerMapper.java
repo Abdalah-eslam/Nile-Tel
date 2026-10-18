@@ -10,12 +10,12 @@ public class LedgerMapper {
     public static Ledger mapResultSetToLedger(ResultSet rs) throws SQLException {
         Ledger ledger = new Ledger();
 
-        ledger.setTxnId(rs.getLong("txn_id"));
-        ledger.setMsisdn(rs.getString("msisdn"));
-        ledger.setTxnTs(rs.getTimestamp("txn_ts"));
-        ledger.setTxnType(rs.getString("txn_type").charAt(0));
+        ledger.setTxnId(rs.getLong("ledger_id"));
+        ledger.setSubscriberId(rs.getLong("subscriber_id"));
+        ledger.setTxnTs(rs.getTimestamp("created_at"));
+        ledger.setTxnType(rs.getString("entry_type").charAt(0));
         ledger.setAmountPiasters(rs.getLong("amount_piasters"));
-        ledger.setBalanceAfter(rs.getLong("balance_after"));
+        ledger.setBalanceAfter(rs.getLong("balance_after_piasters"));
         ledger.setRefNo(rs.getString("ref_no"));
         ledger.setReason(rs.getString("reason"));
 

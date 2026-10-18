@@ -1,6 +1,5 @@
 package service.Impl;
 
-import Exceptions.InvalidRole;
 import dto.response.LedgerDto;
 import jakarta.servlet.http.HttpSession;
 import model.Ledger;
@@ -25,10 +24,10 @@ public class LedgerService implements LedgerInterface {
     @Override
     public List<LedgerDto> getTransactionStatement(HttpSession session, String fromStr, String toStr){
 
-       Object roleAttr =session.getAttribute("role");
-       if(roleAttr ==null || !"Sub".equals(roleAttr.toString())){
-           throw new InvalidRole("not auth");
-       }
+//       Object roleAttr =session.getAttribute("role");
+//       if(roleAttr ==null || !"Sub".equals(roleAttr.toString())){
+//           throw new InvalidRole("not auth");
+//       }
         String msisdn = (String) session.getAttribute("msisdn");
         if (msisdn == null) {
             throw new RuntimeException("Subscriber session required");
@@ -57,6 +56,7 @@ public class LedgerService implements LedgerInterface {
         }
         return  result ;
     }
+
     private LedgerDto toDto(Ledger ledger){
         LedgerDto ledgerDto =new LedgerDto();
         ledgerDto.setTxnId(ledger.getTxnId());

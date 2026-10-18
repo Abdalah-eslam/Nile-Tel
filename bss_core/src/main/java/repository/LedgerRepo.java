@@ -2,6 +2,7 @@ package repository;
 
 import model.Ledger;
 import utils.DBConnection;
+import utils.dbStatements.LedgerStatements;
 import utils.Mapper.LedgerMapper;
 import utils.dbStatements.LedgerStatements;
 
@@ -18,7 +19,7 @@ public class LedgerRepo {
     public List<Ledger> findTransactionsByMsisdnAndDateRange(String msisdn,Timestamp from,Timestamp to){
         List<Ledger> transactions = new ArrayList<>();
         try (Connection connection =DBConnection.getConnection();
-        PreparedStatement ps =connection.prepareStatement(LedgerStatements.FIND_TRANSACTIONS_BY_MSISDN_AND_DATE_RANGE)) {
+             PreparedStatement ps =connection.prepareStatement(LedgerStatements.FIND_TRANSACTIONS_BY_MSISDN_AND_DATE_RANGE)) {
             ps.setString(1, msisdn);
             ps.setTimestamp(2, from);
             ps.setTimestamp(3, to);
@@ -29,9 +30,9 @@ public class LedgerRepo {
                 }
             }
         }
-            catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return transactions;
     }
 }
