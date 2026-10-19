@@ -15,7 +15,16 @@ public class Ledger {
     public Ledger() {
     }
 
+    public Ledger(Long txnId, Long subscriberId, Timestamp txnTs, char txnType,
                   long amountPiasters, long balanceAfter, String refNo, String reason) {
+        this.txnId = txnId;
+        this.subscriberId = subscriberId;
+        this.txnTs = txnTs;
+        this.txnType = txnType;
+        this.amountPiasters = amountPiasters;
+        this.balanceAfter = balanceAfter;
+        this.refNo = refNo;
+        this.reason = reason;
     }
 
     public Long getTxnId() {
