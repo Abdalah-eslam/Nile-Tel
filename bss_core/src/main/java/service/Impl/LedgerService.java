@@ -24,10 +24,10 @@ public class LedgerService implements LedgerInterface {
     @Override
     public List<LedgerDto> getTransactionStatement(HttpSession session, String fromStr, String toStr){
 
-//       Object roleAttr =session.getAttribute("role");
-//       if(roleAttr ==null || !"Sub".equals(roleAttr.toString())){
-//           throw new InvalidRole("not auth");
-//       }
+       Object roleAttr =session.getAttribute("role");
+       if(roleAttr ==null || !"SUB".equals(roleAttr.toString())){
+           throw new RuntimeException("not auth");
+       }
         String msisdn = (String) session.getAttribute("msisdn");
         if (msisdn == null) {
             throw new RuntimeException("Subscriber session required");
