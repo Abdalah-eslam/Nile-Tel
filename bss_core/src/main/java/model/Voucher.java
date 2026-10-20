@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 public class Voucher {
+    private Long voucherId;
     private String voucherCode;
     private BigInteger valuePiasters;
     private LocalDateTime createdAt;
@@ -14,7 +15,8 @@ public class Voucher {
     public Voucher() {
     }
 
-    public Voucher(String voucherCode, BigInteger valuePiasters, LocalDateTime createdAt, int createdByOperatorId, LocalDateTime usedAt, Long usedBySubscriberId) {
+    public Voucher(Long voucherId, String voucherCode, BigInteger valuePiasters, LocalDateTime createdAt, Integer createdByOperatorId, LocalDateTime usedAt, Long usedBySubscriberId) {
+        this.voucherId = voucherId;
         this.voucherCode = voucherCode;
         this.valuePiasters = valuePiasters;
         this.createdAt = createdAt;
@@ -47,11 +49,11 @@ public class Voucher {
         this.createdAt = createdAt;
     }
 
-    public int getCreatedByOperatorId() {
+    public Integer getCreatedByOperatorId() {
         return createdByOperatorId;
     }
 
-    public void setCreatedByOperatorId(int createdByOperatorId) {
+    public void setCreatedByOperatorId(Integer createdByOperatorId) {
         this.createdByOperatorId = createdByOperatorId;
     }
 
@@ -69,6 +71,14 @@ public class Voucher {
 
     public void setUsedBySubscriberId(Long usedBySubscriberId) {
         this.usedBySubscriberId = usedBySubscriberId;
+    }
+
+    public Long getVoucherId() {
+        return voucherId;
+    }
+
+    public void setVoucherId(Long voucherId) {
+        this.voucherId = voucherId;
     }
 
     public boolean isUsed() { return usedAt != null; }

@@ -5,20 +5,23 @@ import java.math.BigInteger;
 import java.sql.Timestamp;
 
 public class Subscriber {
-  private  String msisdn;
-  private  String fullName;
-  private Character status;
-  private int tariff_code ;
-  private String hashedPin;
-  private BigInteger balance_piasters;
+    private Long subscriberId;
+    private  String msisdn;
+    private  String fullName;
+    private Character status;
+    private int tariffCode;
+    private String hashedPin;
+    private BigInteger balancePiasters;
+    private Timestamp activation_at;
 
-    public Subscriber(String msisdn, String fullName, Character status, int tariff_code, String hashedPin, BigInteger balance_piasters, Timestamp activation_at) {
+    public Subscriber(Long subscriberId, String msisdn, String fullName, Character status, int tariffCode, String hashedPin, BigInteger balancePiasters, Timestamp activation_at) {
+        this.subscriberId = subscriberId;
         this.msisdn = msisdn;
         this.fullName = fullName;
         this.status = status;
-        this.tariff_code = tariff_code;
+        this.tariffCode = tariffCode;
         this.hashedPin = hashedPin;
-        this.balance_piasters = balance_piasters;
+        this.balancePiasters = balancePiasters;
         this.activation_at = activation_at;
     }
 
@@ -30,13 +33,10 @@ public class Subscriber {
         this.activation_at = activation_at;
     }
 
-    private Timestamp activation_at;
 
 
     public Subscriber() {
     }
-
-
 
     public String getMsisdn() {
         return msisdn;
@@ -50,27 +50,32 @@ public class Subscriber {
         return status;
     }
 
-    public int getTariff_code() {
-        return tariff_code;
+    public Long getSubscriberId() {
+        return subscriberId;
     }
 
-    public BigInteger getBalance_piasters() {
-        return balance_piasters;
+    public void setSubscriberId(Long subscriberId) {
+        this.subscriberId = subscriberId;
     }
 
+    public int getTariffCode() {
+        return tariffCode;
+    }
+
+    public void setTariffCode(int tariffCode) {
+        this.tariffCode = tariffCode;
+    }
+
+    public BigInteger getBalancePiasters() {
+        return balancePiasters;
+    }
+
+    public void setBalancePiasters(BigInteger balancePiasters) {
+        this.balancePiasters = balancePiasters;
+    }
 
     public void setMsisdn(String msisdn) {
         this.msisdn = msisdn;
-    }
-
-
-
-    public void setBalance_piasters(BigInteger balance_piasters) {
-        this.balance_piasters = balance_piasters;
-    }
-
-    public void setTariff_code(int tariff_code) {
-        this.tariff_code = tariff_code;
     }
 
     public void setStatus(Character status) {

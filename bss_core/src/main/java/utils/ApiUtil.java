@@ -1,5 +1,6 @@
 package utils;
 
+import dto.response.RechargeResponse;
 import dto.response.SubscriberResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Operator;
@@ -61,6 +62,15 @@ public class ApiUtil {
                 ? ""
                 : escape(s.getActivationDt())) + "\""
             + "}}";
+    }
+    public static String rechargeJson(RechargeResponse r) {
+        return "{"
+                + "\"RESULT\":\"OK\","
+                + "\"DATA\":{"
+                + "\"TXN_ID\":" + r.txnId() + ","
+                + "\"AMOUNT_PIASTERS\":" + r.amountPiasters() + ","
+                + "\"BALANCE_PIASTERS\":" + r.balancePiasters()
+                + "}}";
     }
 
     public static void error(

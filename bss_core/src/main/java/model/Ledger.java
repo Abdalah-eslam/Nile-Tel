@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 public class Ledger {
-    int subscriberId;
+    Long subscriberId;
     Character entryType;
     BigInteger amountPiasters;
     BigInteger balanceAfterPiasters;
@@ -15,7 +15,7 @@ public class Ledger {
     public Ledger() {
     }
 
-    public Ledger(int subscriberId, Character entryType, BigInteger amountPiasters, BigInteger balanceAfterPiasters, String referenceNumber, String reason, LocalDateTime createdAt) {
+    public Ledger(Long subscriberId, Character entryType, BigInteger amountPiasters, BigInteger balanceAfterPiasters, String referenceNumber, String reason, LocalDateTime createdAt) {
         this.subscriberId = subscriberId;
         this.entryType = entryType;
         this.amountPiasters = amountPiasters;
@@ -25,11 +25,11 @@ public class Ledger {
         this.createdAt = createdAt;
     }
 
-    public int getSubscriberId() {
+    public Long getSubscriberId() {
         return subscriberId;
     }
 
-    public void setSubscriberId(int subscriberId) {
+    public void setSubscriberId(Long subscriberId) {
         this.subscriberId = subscriberId;
     }
 

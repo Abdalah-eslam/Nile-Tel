@@ -32,8 +32,8 @@ public class SubsciberMapper {
         subscriber.setMsisdn(rs.getString("msisdn"));
         subscriber.setFullName(rs.getString("full_name"));
         subscriber.setStatus(rs.getString("status").charAt(0));
-        subscriber.setTariff_code(rs.getInt("tariff_id"));
-        subscriber.setBalance_piasters(
+        subscriber.setTariffCode(rs.getInt("tariff_id"));
+        subscriber.setBalancePiasters(
                 rs.getBigDecimal("balance_piasters").toBigInteger()
         );
         subscriber.setHashedPin(rs.getString("pin_hash"));
@@ -47,8 +47,8 @@ public class SubsciberMapper {
         subscriberResponse.setMsisdn(subscriber.getMsisdn());
         subscriberResponse.setStatus(String.valueOf(subscriber.getStatus()));
         subscriberResponse.setFullName(subscriber.getFullName());
-        subscriberResponse.setTariffCode(String.valueOf(subscriber.getTariff_code()));
-        subscriberResponse.setBalancePiasters(subscriber.getBalance_piasters());
+        subscriberResponse.setTariffCode(String.valueOf(subscriber.getTariffCode()));
+        subscriberResponse.setBalancePiasters(subscriber.getBalancePiasters());
         subscriberResponse.setActivationDt(subscriber.getActivation_at().toString());
 
         return subscriberResponse;
